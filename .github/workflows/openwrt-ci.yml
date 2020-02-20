@@ -54,7 +54,22 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+          rm -f ./.config*
+          touch ./.config
+          
+          cat >> .config <<EOF
+           CONFIG_TARGET_ipq40xx=y
+           CONFIG_TARGET_ipq40xx_DEVICE_p2w_r619ac-128m=y
+           CONFIG_TARGET_BOARD="ipq40xx"
+           CONFIG_TARGET_SUBTARGET="generic"
+           CONFIG_TARGET_PROFILE="DEVICE_p2w_r619ac-128m"
+           CONFIG_TARGET_ARCH_PACKAGES="arm_cortex-a7_neon-vfpv4"
+         EOF
+         
+         sed -i 's/^[ \t]*//g' ./.config
+          
+         make defconfig
 
       - name: Make download
         run: |
