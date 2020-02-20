@@ -65,11 +65,11 @@ jobs:
            CONFIG_TARGET_SUBTARGET="generic"
            CONFIG_TARGET_PROFILE="DEVICE_p2w_r619ac-128m"
            CONFIG_TARGET_ARCH_PACKAGES="arm_cortex-a7_neon-vfpv4"
-         EOF
+          EOF
          
-         sed -i 's/^[ \t]*//g' ./.config
+          sed -i 's/^[ \t]*//g' ./.config
           
-         make defconfig
+          make defconfig
 
       - name: Make download
         run: |
